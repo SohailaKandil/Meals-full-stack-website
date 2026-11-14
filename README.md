@@ -71,13 +71,18 @@ Only approved recipes are shown as published recipes to general visitors.
 - **Backend:** Laravel and PHP
 - **API:** Laravel REST API
 - **Authentication:** Laravel Sanctum
-- **Database:** SQLite for local development; Laravel can be configured to use another supported database.
+- **Database:** SQLite.
 
-## Running the Project Locally
+- 
+## Deployment
 
-### Backend
+The project is hosted on **Alwaysdata**.
 
-From the Laravel project folder:
+- **Frontend:** React.js (Vite)
+- **Backend:** Laravel (PHP)
+- **Database:** SQLite
+- **Hosting:** Alwaysdata
 
-```bash
-composer install
+The React application is built and deployed inside Laravel's `public` directory. Laravel handles API requests, user authentication, and database operations.
+
+**Live Demo:** [Meals App](https://sohaila-kandil.alwaysdata.net/)
