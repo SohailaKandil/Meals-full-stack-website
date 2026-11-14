@@ -85,4 +85,4 @@ The project is hosted on **Alwaysdata**.
 
 The React application is built and deployed inside Laravel's `public` directory. Laravel handles API requests, user authentication, and database operations.
 
-**Live Demo:** [Meals App]([https://sohaila-kandil.alwaysdata.net/](https://sohaila-kandil.alwaysdata.net/))
+**Live Demo:** [Meals App](https://sohaila-kandil.alwaysdata.net/)
