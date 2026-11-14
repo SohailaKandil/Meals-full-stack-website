@@ -3,7 +3,7 @@
 A full-stack website for discovering and sharing recipes. Users can create accounts, browse published recipes, and submit their own recipes. Administrators review submissions and decide which recipes appear on the website.
 
 
-![Recipe Sharing Website](screenshots/home.png)
+![Recipe Sharing Website](meals.png)
 
 
 ## Project Overview
