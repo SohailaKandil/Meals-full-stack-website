@@ -8,6 +8,7 @@ A full-stack website for discovering and sharing recipes. Users can create accou
 
 ## Project Overview
 **Live Demo:** [Meals App](https://sohaila-kandil.alwaysdata.net/)
+
 The website has two main roles:
 
 - **User:** browses recipes and submits recipes for review.
