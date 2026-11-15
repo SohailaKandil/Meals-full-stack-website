@@ -1,5 +1,5 @@
-# Recipe Sharing Website  [Live Demo](https://sohaila-kandil.alwaysdata.net/)
-
+# Recipe Sharing Website  
+###[Live Demo](https://sohaila-kandil.alwaysdata.net/)
 A full-stack website for discovering and sharing recipes. Users can create accounts, browse published recipes, and submit their own recipes. Administrators review submissions and decide which recipes appear on the website.
 
 
