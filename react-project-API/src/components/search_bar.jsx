@@ -1,5 +1,5 @@
 import { useState , useEffect} from 'react'
-const meals_url = import.meta.env.VITE_MEALS_URL
+const meals_url = import.meta.env.VITE_MEALS_URL 
 
 export default function Search_bar({filtered_meals_func}) {
     const [searchTerm, setSearchTerm] = useState('')

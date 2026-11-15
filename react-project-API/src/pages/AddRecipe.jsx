@@ -1,13 +1,26 @@
-import { useState } from 'react'
+import { useState , useRef } from 'react'
+import Axios_client from '../axios_client'
+import { use_auth } from '../safe_routes/context_provider'
 
 const fieldClassName =
   'w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-sm text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-emerald-700 focus:ring-4 focus:ring-emerald-700/10'
 
 const labelClassName = 'mb-2 block text-sm font-medium text-stone-700'
 
+
+
 export default function AddRecipe() {
   const [ingredients, setIngredients] = useState([''])
+  const [message, set_message] = useState("")
+  const [messageType, set_message_type] = useState('success')
+  
+  const{role} = use_auth()
 
+  const name = useRef()
+  const nationality = useRef()
+  const recipe_type = useRef()
+  const image = useRef()
+  const recipe = useRef()
 
   function updateIngredient(index, value) {
     setIngredients((currentIngredients) =>
@@ -29,6 +42,33 @@ export default function AddRecipe() {
 
   function handleSubmit(event) {
     event.preventDefault()
+    const params = 
+      {
+        name: name.current.value,
+        nationality: nationality.current.value,
+        recipe_type: recipe_type.current.value,
+        image_url: image.current.value,
+        instructions: recipe.current.value,
+        ingredients: ingredients
+      }
+    
+
+    Axios_client.post('/add_recipe', params)
+      .then(({ data }) => {
+        set_message_type('success')
+        set_message(data.message)
+      })
+      .catch((error) => {
+        console.error(error.response?.data ?? error)
+        const responseData = error.response?.data
+        const validationMessages = Object.values(responseData?.errors ?? {}).flat()
+        const errorMessage = validationMessages.length
+          ? validationMessages.join(' ')
+          : responseData?.message ?? 'There was a problem submitting your recipe'
+
+        set_message_type('error')
+        set_message(errorMessage)
+      })
   }
 
 
@@ -47,7 +87,18 @@ export default function AddRecipe() {
             Share a favorite from your kitchen. Add the details and list each ingredient on its own line.
           </p>
         </header>
-
+        {message && (
+          <div
+            role={messageType === 'error' ? 'alert' : 'status'}
+            className={`mx-6 mt-6 rounded-xl border px-4 py-3 text-sm shadow-sm sm:mx-10 ${
+              messageType === 'error'
+                ? 'border-red-200 bg-red-50 text-red-800'
+                : 'border-emerald-200 bg-emerald-50 text-emerald-900'
+            }`}
+          >
+            <p className="font-medium">{message}</p>
+          </div>
+        )}
         <form className="space-y-8 p-6 sm:p-10" onSubmit={handleSubmit}>
           <div className="grid gap-6 sm:grid-cols-2">
             <div>
@@ -55,6 +106,7 @@ export default function AddRecipe() {
                 Recipe name
               </label>
               <input
+                ref={name}
                 className={fieldClassName}
                 id="recipe-name"
                 name="recipeName"
@@ -70,6 +122,7 @@ export default function AddRecipe() {
                 Nationality or cuisine
               </label>
               <input
+                ref={nationality}
                 className={fieldClassName}
                 id="nationality"
                 name="nationality"
@@ -85,6 +138,7 @@ export default function AddRecipe() {
                 Type of recipe
               </label>
               <select
+                ref={recipe_type}
                 className={fieldClassName}
                 id="recipe-type"
                 name="recipeType"
@@ -109,11 +163,13 @@ export default function AddRecipe() {
                 Recipe image URL
               </label>
               <input
+                ref={image}
                 className={fieldClassName}
                 id="recipe-image"
                 name="recipeImage"
                 type="url"
                 placeholder="https://example.com/recipe-photo.jpg"
+                required
               />
             </div>
           </div>
@@ -148,6 +204,7 @@ export default function AddRecipe() {
                     className="h-2 w-2 shrink-0 rounded-full bg-emerald-700"
                   />
                   <input
+
                     aria-label={`Ingredient ${index + 1}`}
                     className={fieldClassName}
                     name="ingredients[]"
@@ -177,6 +234,7 @@ export default function AddRecipe() {
               How to make the recipe
             </label>
             <textarea
+              ref={recipe}
               className={`${fieldClassName} min-h-44 resize-y leading-6`}
               id="instructions"
               name="instructions"

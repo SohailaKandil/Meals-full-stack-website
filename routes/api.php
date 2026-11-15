@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth_controller;
+use App\Http\Controllers\crud_controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post("/signup" , [Auth_controller::class, "signup"]);
 Route::post("/login" , [Auth_controller::class, "login"]);
 Route::middleware('auth:sanctum')->post("/logout" , [Auth_controller::class, "logout"]);
+
+Route::middleware('auth:sanctum')->post('/add_recipe',[crud_controller::class, 'add_recipe']);
