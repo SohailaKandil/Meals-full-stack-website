@@ -89,7 +89,7 @@ Only approved recipes are shown as published recipes to general visitors.
 - **Authentication:** Laravel Sanctum
 - **Database:** SQLite.
 
-- 
+  
 ## Deployment
 
 The project is hosted on **Alwaysdata**.
