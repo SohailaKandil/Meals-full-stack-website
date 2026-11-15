@@ -83,7 +83,7 @@ Only approved recipes are shown as published recipes to general visitors.
 
 ## Technology
 
-- **Frontend:** React and Vite
+- **Frontend:** React, Vite and TailwindCSS
 - **Backend:** Laravel
 - **API:** Laravel REST API
 - **Authentication:** Laravel Sanctum
