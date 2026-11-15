@@ -92,7 +92,7 @@ Only approved recipes are shown as published recipes to general visitors.
   
 ## Deployment
 
-The project is hosted on **Alwaysdata**.
+The project is hosted on **Alwaysdata** [Meals App](https://www.alwaysdata.com/en/)  
 
 - **Frontend:** React.js (Vite)
 - **Backend:** Laravel (PHP)
