@@ -32,14 +32,25 @@ A submitted recipe is reviewed before it becomes publicly visible. This helps ke
   - Image, when available
 - See whether a submitted recipe is awaiting review, approved, or rejected.
 
-### Admin features
+### Admin Features
 
-- Access admin features using an administrator account.
-- View recipes submitted by users.
-- Review recipe details before making a decision.
-- Approve a recipe so it can be published.
-- Reject a recipe that should not be published.
-- Manage the collection of published recipes.
+Administrators have access to a dedicated dashboard where they can manage recipe submissions and published content.
+
+- **View Submissions:** Browse recipes submitted by users.
+- **Review Recipes:** Inspect recipe details before making a decision.
+- **Approve Recipes:** Approve submissions to make them publicly available.
+- **Reject Recipes:** Reject submissions that do not meet the website's requirements.
+- **Manage Published Recipes:** Manage the collection of approved and published recipes.
+
+### Admin Demo Account
+
+To explore the admin features, log in using the following administrator account:
+
+| Field | Credentials |
+|---|---|
+| **Email** | `abdul@gmail.com` |
+| **Password** | `m1h2s3a4e5*` |
+
 
 ## How Recipe Approval Works
 
