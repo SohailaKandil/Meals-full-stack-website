@@ -59,7 +59,6 @@ To explore the admin features, log in using the following administrator account:
 4. The administrator either:
    - **Approves** it, making it visible in the public recipe collection, or
    - **Rejects** it, keeping it off the public recipe collection.
-5. Users can check the status of their submissions.
 
 Only approved recipes are shown as published recipes to general visitors.
 
