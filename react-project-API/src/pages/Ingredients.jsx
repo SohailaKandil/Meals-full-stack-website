@@ -1,9 +1,16 @@
 import { useEffect } from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
-
+import {URL_CARD , DATABASE_CARD} from '../APP_CONSTANTS'
 
 export default function Ingredients() {
-  const meal = useLocation().state
+  const {meal , type} = useLocation().state
+  let recipe_ingredients = []
+  let image = ''
+  let nationality = ''
+  let recipe_type = ''
+  let recipe_name = ''
+  let instructions = ''
+
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -14,12 +21,29 @@ export default function Ingredients() {
     return <Navigate to="/" replace />
   }
 
-  const ingredients = Array.from({ length: 20 }, (_, index) => {
-    const number = index + 1
-    const name = meal[`strIngredient${number}`]?.trim()
-    const amount = meal[`strMeasure${number}`]?.trim()
-    return name ? { name, amount } : null
-  }).filter(Boolean)
+  if (type == URL_CARD){
+    recipe_ingredients = Array.from({ length: 20 }, (_, index) => {
+        const number = index + 1
+        return meal[`strIngredient${number}`]?.trim()
+    }).filter(Boolean)
+
+    image = meal.strMealThumb
+    nationality = meal.strArea
+    recipe_type = meal.strCategory
+    recipe_name = meal.strMeal
+    instructions = meal.strInstructions
+  }
+
+  else if (type == DATABASE_CARD){
+    console.log("a database card")
+    recipe_ingredients = meal.ingredients
+    image = meal.image_url
+    nationality = meal.nationality
+    recipe_type = meal.recipe_type
+    recipe_name = meal.recipe_name
+    instructions = meal.instructions
+  }
+
 
   
   return (
@@ -27,13 +51,12 @@ export default function Ingredients() {
         <div className="overflow-hidden rounded-3xl bg-white shadow-[0_20px_60px_-32px_rgba(28,38,25,0.35)] ring-1 ring-black/5">
           <div className="relative">
             <img
-              src={meal.strMealThumb}
-              alt={meal.strMeal}
+              src={image}
               className="h-64 w-full object-cover sm:h-96"
             />
-            {meal.strArea && (
+            {nationality && (
               <span className="absolute bottom-4 left-4 rounded-full bg-white/95 px-4 py-2 text-sm font-medium text-emerald-900 shadow-sm">
-                {meal.strArea}
+                {nationality}
               </span>
             )
             }
@@ -42,10 +65,10 @@ export default function Ingredients() {
           <div className="p-6 sm:p-10">
             <header className="border-b border-stone-200 pb-6">
               <p className="text-sm font-semibold uppercase tracking-widest text-emerald-800">
-                A simple homemade {meal.strCategory} recipe
+                A simple homemade {recipe_type} recipe
               </p>
               <h1 className="mt-2 text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">
-                {meal.strMeal}
+                {recipe_name}
               </h1>
             </header>
 
@@ -58,15 +81,13 @@ export default function Ingredients() {
                   Ingredients
                 </h2>
                 <ul className="mt-5 divide-y divide-stone-100">
-                  {ingredients.map(({ name , amount } , index) => (
+                  {recipe_ingredients.map((ingredient , index) => (
                     <li
                       key={index}
                       className="flex items-start justify-between gap-4 py-3 text-sm"
                     >
-                      <span className="text-stone-700">{name}</span>
-                      <span className="shrink-0 font-medium text-stone-500">
-                        {amount}
-                      </span>
+                      <span className="text-stone-700">{ingredient}</span>
+                      
                     </li>
                   ))}
                 </ul>
@@ -80,7 +101,7 @@ export default function Ingredients() {
                   How to make it
                 </h2>
                 <p className="mt-5 text-sm leading-7 text-stone-600">
-                  {meal.strInstructions}
+                  {instructions}
                 </p>
               </section>
             </div>

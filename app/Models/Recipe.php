@@ -17,6 +17,7 @@ class Recipe extends Model
         'ingredients',
         'instructions',
         'pending',
+        'user_id'
     ];
 
     protected $casts = [
