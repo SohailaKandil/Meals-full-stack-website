@@ -27,3 +27,6 @@ Route::middleware('auth:sanctum')->post("/logout" , [Auth_controller::class, "lo
 Route::middleware('auth:sanctum')->post('/add_recipe',[crud_controller::class, 'add_recipe']);
 
 Route::get("/get_non_pending_recipes" , [crud_controller::class, 'get_non_pending_recipes']);
+Route::middleware('auth:sanctum')->get('/get_pending_recipes',[crud_controller::class, 'get_pending_recipes']);
+Route::middleware('auth:sanctum')->delete('/reject_recipe',[crud_controller::class, 'reject_recipe']);
+Route::middleware('auth:sanctum')->patch('/accept_recipe',[crud_controller::class, 'accept_recipe']);

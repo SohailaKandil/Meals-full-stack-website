@@ -57,7 +57,7 @@ export default function Home() {
                         type="button"
                         onClick={() => set_page_number((currentPage) => Math.max(1, currentPage - 1))}
                         disabled={page_number == 1}
-                        className="rounded-lg border border-stone-300 px-4 py-2 text-sm font-medium text-stone-700 disabled:cursor-not-allowed disabled:opacity-50"
+                        className="rounded-lg border border-stone-300 px-4 py-2 text-sm font-medium text-stone-700 transition-all duration-200 enabled:hover:-translate-y-0.5 enabled:hover:border-emerald-800 enabled:hover:bg-emerald-800 enabled:hover:text-white enabled:hover:shadow-md active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-800"
                     >
                         Previous
                     </button>
@@ -68,7 +68,7 @@ export default function Home() {
                         type="button"
                         onClick={() => set_page_number((currentPage) => currentPage + 1)}
                         disabled={page_number >= max_page_number}
-                        className="rounded-lg border border-stone-300 px-4 py-2 text-sm font-medium text-stone-700 disabled:cursor-not-allowed disabled:opacity-50"
+                        className="rounded-lg border border-stone-300 px-4 py-2 text-sm font-medium text-stone-700 transition-all duration-200 enabled:hover:-translate-y-0.5 enabled:hover:border-emerald-800 enabled:hover:bg-emerald-800 enabled:hover:text-white enabled:hover:shadow-md active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-800"
                     >
                         Next
                     </button>

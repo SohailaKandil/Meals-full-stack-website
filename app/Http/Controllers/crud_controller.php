@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\add_recipe_request;
-use App\Http\Resources\user_resource;
+use App\Http\Requests\search_recipes_request;
+use App\Http\Requests\update_recipe_request;
+use App\Http\Resources\recipe_resource;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 
@@ -30,8 +32,10 @@ class crud_controller extends Controller
         ], 201);
     }
 
-    public function get_non_pending_recipes (Request $request){
-        $search = trim((string) $request->query('search', ''));
+    public function get_non_pending_recipes (search_recipes_request $request){
+        $validated = $request->validated();
+        $search = trim((string) ($validated["search"] ?? ""));
+
         $query = Recipe::where("pending" , false);
 
         if($search != ""){
@@ -44,7 +48,38 @@ class crud_controller extends Controller
             );
         }
 
-        return user_resource::collection($query->paginate(3));
+        return recipe_resource::collection($query->paginate(3));
        
+    }
+
+    public function get_pending_recipes (Request $request){
+        abort_unless($request->user()->is_admin , 403 , "Sorry accepting recipes is for Admins only.");
+        $query = Recipe::where("pending" , true)->paginate(2);
+
+        return (
+            recipe_resource::collection(
+                $query
+            )
+        );    
+    }
+
+    public function reject_recipe (update_recipe_request $request){
+        abort_unless($request->user()->is_admin , 403 , "Sorry, rejecting or approving recipes is for Admins only.");
+
+        $recipe_id = $request->recipe_id;
+
+        $recipe = Recipe::findOrFail($recipe_id);
+        $recipe->delete();  
+    }
+
+    public function accept_recipe (update_recipe_request $request){
+        abort_unless($request->user()->is_admin , 403 , "Sorry, rejecting or approving recipes is for Admins only.");
+
+        $recipe_id = $request->recipe_id;
+
+        $recipe = Recipe::findOrFail($recipe_id);
+        $recipe->pending = false;
+        
+        $recipe -> save();
     }
 }

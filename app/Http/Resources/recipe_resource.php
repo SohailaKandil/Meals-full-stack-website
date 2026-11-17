@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class user_resource extends JsonResource
+class recipe_resource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,6 +22,7 @@ class user_resource extends JsonResource
                 'image_url' => $this -> image_url,
                 'ingredients' => $this -> ingredients,
                 'instructions' => $this -> instructions,
+                'recipe_id' => $this -> id 
             ]
         );
     }

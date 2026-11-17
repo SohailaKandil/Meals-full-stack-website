@@ -15,6 +15,8 @@ export default function Search_bar({url_meals_func , database_meals_func , page_
     const [all_url_pages, set_all_url_pages] = useState(0)
     const [search_url_pages, set_search_url_pages] = useState(0)
 
+    const [database_error_message , set_database_err_message] = useState("")
+
     const fetch_all_url_meals = () => {
         fetch(meals_url)
         .then((response) => response.json())
@@ -72,6 +74,7 @@ export default function Search_bar({url_meals_func , database_meals_func , page_
                 }
             ).catch(
                 ()=>{
+                    database_meals_func([])
                     console.log("there is an error fetching the meals")
                 }
             )

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string("image_url");
             $table->json("ingredients");
             $table->string("instructions");
-            $table->boolean('pending')->default(1);
+            $table->boolean('pending')->default(true);
             $table->timestamps();
         });
     }

@@ -35,7 +35,6 @@ export default function Ingredients() {
   }
 
   else if (type == DATABASE_CARD){
-    console.log("a database card")
     recipe_ingredients = meal.ingredients
     image = meal.image_url
     nationality = meal.nationality
